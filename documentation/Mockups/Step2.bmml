@@ -1,0 +1,14 @@
+<mockup version="1.0" skin="sketch" measuredW="563" measuredH="271" mockupW="236" mockupH="240">
+  <controls>
+    <control controlID="0" controlTypeID="com.balsamiq.mockups::Title" x="330" y="31" w="230" h="-1" measuredW="185" measuredH="50" zOrder="0" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>CoolEvent</text>
+      </controlProperties>
+    </control>
+    <control controlID="6" controlTypeID="com.balsamiq.mockups::Paragraph" x="327" y="81" w="236" h="190" measuredW="200" measuredH="140" zOrder="1" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>You%20have%20succesfully%20registered%20for%20Cool%20Event%20don%27t%20forget%20to%20follow%20us%20in%20twitter%20%5B@cooltwitter%5D%20and%20in%20%5Bfb/coolfacebook%5D.%0A%20%0AAlso%20take%20this%20cool%20free%20e-book%2C%20just%20because%20you%20are%20osom%20-%3E%20%5BOsom%20Book%20that%20only%20registered%20users%20are%20going%20to%20see%5D%0A%20%0AThanks%2C%20Cool%20Thing%20Team.</text>
+      </controlProperties>
+    </control>
+  </controls>
+</mockup>

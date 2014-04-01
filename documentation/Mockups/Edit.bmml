@@ -1,0 +1,90 @@
+<mockup version="1.0" skin="sketch" measuredW="263" measuredH="1099" mockupW="230" mockupH="1068">
+  <controls>
+    <control controlID="4" controlTypeID="com.balsamiq.mockups::TextInput" x="33" y="96" w="230" h="-1" measuredW="77" measuredH="27" zOrder="0" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Cool%20Event</text>
+      </controlProperties>
+    </control>
+    <control controlID="5" controlTypeID="com.balsamiq.mockups::Title" x="33" y="31" w="230" h="-1" measuredW="181" measuredH="37" zOrder="1" locked="false" isInGroup="-1">
+      <controlProperties>
+        <size>28</size>
+        <text>Edit%20Campaing</text>
+      </controlProperties>
+    </control>
+    <control controlID="6" controlTypeID="com.balsamiq.mockups::Label" x="33" y="75" w="-1" h="-1" measuredW="42" measuredH="21" zOrder="2" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Name</text>
+      </controlProperties>
+    </control>
+    <control controlID="7" controlTypeID="com.balsamiq.mockups::TextInput" x="33" y="152" w="230" h="-1" measuredW="79" measuredH="27" zOrder="3" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>cool_event</text>
+      </controlProperties>
+    </control>
+    <control controlID="8" controlTypeID="com.balsamiq.mockups::Label" x="33" y="131" w="-1" h="-1" measuredW="62" measuredH="21" zOrder="4" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Pretty%20Url</text>
+      </controlProperties>
+    </control>
+    <control controlID="10" controlTypeID="com.balsamiq.mockups::Label" x="33" y="187" w="-1" h="-1" measuredW="69" measuredH="21" zOrder="5" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Description</text>
+      </controlProperties>
+    </control>
+    <control controlID="15" controlTypeID="com.balsamiq.mockups::TextArea" x="33" y="208" w="230" h="281" measuredW="200" measuredH="140" zOrder="6" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Cool%20event%20is%20the%20coolest%20event%20in%20the%20ZMG%2C%20and%20you%20should%20really%20really%20go.%0A%20%0AWe%27ll%20have%20clowns%2C%20drinks%20and%20assorted%20nuts%2C%20because%20you%20are%20worth%20it%0A%20%0AThe%20only%20thing%20you%20have%20to%20do%20is%20to%20PayIt%20with%20a%20twit%20%3AD%0A%20%0AEasypeacy...%20%A1We%20are%20expecting%20you%21%0A%20%0ADay%3A%0A24%20Feb%202014%207%3A00pm%0APlace%3A%0AHackerGarage%0AVidrio%20%232184%0ACol.%20Americana%0AGuadalajara%2C%20Jal.</text>
+        <verticalScrollbar>true</verticalScrollbar>
+      </controlProperties>
+    </control>
+    <control controlID="16" controlTypeID="com.balsamiq.mockups::Label" x="33" y="558" w="-1" h="-1" measuredW="35" measuredH="21" zOrder="7" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Twitt</text>
+      </controlProperties>
+    </control>
+    <control controlID="17" controlTypeID="com.balsamiq.mockups::TextArea" x="33" y="579" w="230" h="89" measuredW="200" measuredH="140" zOrder="8" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>I%27m%20going%20to%20cool%20event%20and%20i%27m%20paying%20for%20it%20with%20a%20simple%20twit%20http%3A//payit.com/cool_event%20%23Cool%20%23Epic%20%23LOL%20%23HASH_ABUSE</text>
+      </controlProperties>
+    </control>
+    <control controlID="18" controlTypeID="com.balsamiq.mockups::Label" x="205" y="557" w="-1" h="-1" measuredW="58" measuredH="21" zOrder="9" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>34%20chars</text>
+      </controlProperties>
+    </control>
+    <control controlID="19" controlTypeID="com.balsamiq.mockups::PointyButton" x="194" y="1072" w="-1" h="-1" measuredW="69" measuredH="27" zOrder="10" locked="false" isInGroup="-1">
+      <controlProperties>
+        <direction>right</direction>
+        <href>Published%26bm%3BPublished.bmml%26bm%3BPublished.bmml%26bm%3BPublished.bmml</href>
+        <map>%3Carea%20shape%3D%22rect%22%20coords%3D%22161%2C1041%2C230%2C1068%22%20href%3D%22Published.bmml%22%20alt%3D%22Published%22%20id%3D%2219%22/%3E</map>
+        <text>Preview</text>
+      </controlProperties>
+    </control>
+    <control controlID="27" controlTypeID="com.balsamiq.mockups::TextInput" x="33" y="516" w="230" h="-1" measuredW="93" measuredH="27" zOrder="11" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Register%20Now</text>
+      </controlProperties>
+    </control>
+    <control controlID="28" controlTypeID="com.balsamiq.mockups::Label" x="33" y="495" w="-1" h="-1" measuredW="81" measuredH="21" zOrder="12" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Twit%20it%20Button</text>
+      </controlProperties>
+    </control>
+    <control controlID="30" controlTypeID="com.balsamiq.mockups::TextArea" x="33" y="698" w="230" h="281" measuredW="200" measuredH="140" zOrder="13" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>You%20have%20succesfully%20registered%20for%20Cool%20Event%20don%27t%20forget%20to%20follow%20us%20in%20twitter%20%5B@cooltwitter%5D%20and%20in%20%5Bfb/coolfacebook%5D.%0A%20%0AAlso%20take%20this%20cool%20free%20e-book%2C%20just%20because%20you%20are%20osom%20-%3E%20%5BOsom%20Book%20that%20only%20registered%20users%20are%20going%20to%20see%5D%0A%20%0AThanks%2C%20Cool%20Thing%20Team.</text>
+        <verticalScrollbar>true</verticalScrollbar>
+      </controlProperties>
+    </control>
+    <control controlID="31" controlTypeID="com.balsamiq.mockups::Paragraph" x="33" y="677" w="230" h="21" measuredW="200" measuredH="140" zOrder="14" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Thank%20you%20Text%3A%20</text>
+      </controlProperties>
+    </control>
+    <control controlID="32" controlTypeID="com.balsamiq.mockups::Paragraph" x="33" y="986" w="230" h="86" measuredW="200" measuredH="140" zOrder="15" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>%28Include%20Links%20and%20instructions%2C%20this%20information%20will%20be%20presented%20to%20the%20user%20when%20once%20he%20registers%20and%20a%20copy%20of%20it%20will%20be%20sent%20to%20his%20email%20account%29</text>
+      </controlProperties>
+    </control>
+  </controls>
+</mockup>
