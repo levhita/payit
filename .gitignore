@@ -1,5 +1,9 @@
 .DS_Store
 
+application/config/config.php
+application/config/twitter.php
+application/config/database.php
+
 application/cache/*
 !application/cache/index.html
 !application/cache/.htaccess
