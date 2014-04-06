@@ -18,11 +18,13 @@ class Layout
       $this->layout = $layout;
     }
 
-    function view($view, $data=null, $return=false)
+    function view($view, $data=null, $title='', $return=false)
     {
         $loadedData = array();
         $loadedData['_content_for_layout_'] = $this->obj->load->view($view,$data,true);
-
+        $loadedData['_title_for_layout_']   = $title;
+        $loadedData['_is_logged_in_'] = $this->obj->twitteroauth->isLoggedIn();
+        
         if($return)
         {
             $output = $this->obj->load->view($this->layout, $loadedData, true);

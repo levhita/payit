@@ -38,7 +38,7 @@ class TwitterOAuth {
 
 	function __construct()
 	{
-		// Do nothing	
+		$this->obj =& get_instance();	
 	}
 	
 	/**
@@ -240,5 +240,9 @@ class TwitterOAuth {
 			$this->http_header[$key] = $value;
 		}
 		return strlen($header);
+	}
+
+	function isLoggedIn(){
+		return ($this->obj->session->userdata('access_token') && $this->obj->session->userdata('access_token_secret'))?true:false;
 	}
 }

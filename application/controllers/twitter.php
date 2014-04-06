@@ -20,12 +20,7 @@ class Twitter extends CI_Controller
 	function __construct()
 	{
 		parent::__construct();
-		// Loading TwitterOauth library. Delete this line if you choose autoload method.
-		$this->load->library('twitteroauth');
-		// Loading twitter configuration.
-		$this->config->load('twitter');
-		
-		if($this->session->userdata('access_token') && $this->session->userdata('access_token_secret'))
+		if($this->twitteroauth->isLoggedIn())
 		{
 			// If user already logged in
 			$this->connection = $this->twitteroauth->create($this->config->item('twitter_consumer_token'), $this->config->item('twitter_consumer_secret'), $this->session->userdata('access_token'),  $this->session->userdata('access_token_secret'));
@@ -111,6 +106,12 @@ class Twitter extends CI_Controller
 		}
 	}
 	
+	public function logout(){
+		$this->reset_session();
+		$this->session->sess_destroy();
+		redirect(base_url('/'));
+    }
+
 	public function post($in_reply_to)
 	{
 		$message = $this->input->post('message');
