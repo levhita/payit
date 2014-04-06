@@ -21,9 +21,10 @@ class Layout
     function view($view, $data=null, $title='', $return=false)
     {
         $loadedData = array();
+        $data['_title_for_layout_'] = $loadedData['_title_for_layout_'] = $title;
+        $data['_is_logged_in_'] = $loadedData['_is_logged_in_'] = $this->obj->twitteroauth->isLoggedIn();
         $loadedData['_content_for_layout_'] = $this->obj->load->view($view,$data,true);
-        $loadedData['_title_for_layout_']   = $title;
-        $loadedData['_is_logged_in_'] = $this->obj->twitteroauth->isLoggedIn();
+        
         
         if($return)
         {

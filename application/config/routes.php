@@ -38,8 +38,12 @@
 |
 */
 
-$route['default_controller'] = "welcome";
+$route['signout'] = "/twitter/signout";
+$route['signin'] = "/twitter/auth";
+$route['campaign/new'] = "/campaign/create";
+$route['default_controller'] = "main";
 $route['404_override'] = '';
+
 
 
 /* End of file routes.php */

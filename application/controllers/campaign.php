@@ -1,6 +1,6 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Welcome extends CI_Controller {
+class Campaign extends CI_Controller {
 
 	/**
 	 * Index Page for this controller.
@@ -19,7 +19,21 @@ class Welcome extends CI_Controller {
 	 */
 	public function index()
 	{
-		$this->layout->view('welcome_message');
+		// see campaign... retrieve id
+		$this->layout->view('landpage');
+	}
+
+	public function edit()
+	{
+		//edit campaign
+		$data = array(); // Load this data from database
+		$this->layout->view('campaign_edit', $data);
+	}
+	
+	public function create()
+	{
+		$data = array(); // Add default data
+		$this->layout->view('campaign_edit', $data);	
 	}
 }
 

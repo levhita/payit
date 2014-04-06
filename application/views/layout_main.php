@@ -9,6 +9,7 @@
 	<link href="/css/bootstrap.min.css" rel="stylesheet">
 	<link href="/css/bootstrap-theme.min.css" rel="stylesheet">
 	<link href="/css/style.css" rel="stylesheet">
+	<link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
 <!--[if lt IE 9]>
 	<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
 	<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
@@ -33,9 +34,10 @@
 				</ul>
 				<ul class="nav navbar-nav navbar-right">
 					<?php if($_is_logged_in_): ?>
-					<li><a href="/twitter/logout">Logout</a></li>
+					<li><a href="/account/"><i class="fa fa-user fa-lg"></i> <?php echo $this->session->userdata['twitter_screen_name']?></a></li>
+					<li><a href="/signout"><i class="fa fa-sign-out fa-lg"></i> Sign out</a></li>
 					<?php else: ?>
-					<li><a href="/twitter/auth">Login with Twitter</a></li>
+					<li><a href="/signin"><i class="fa fa-twitter fa-lg"></i> Sign in with Twitter</a></li>
 					<?php endif;?>
 				</ul>
 

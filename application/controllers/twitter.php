@@ -44,7 +44,7 @@ class Twitter extends CI_Controller
 	 */
 	public function auth()
 	{
-		if($this->session->userdata('access_token') && $this->session->userdata('access_token_secret'))
+		if($this->twitteroauth->isLoggedIn())
 		{
 			// User is already authenticated. Add your user notification code here.
 			redirect(base_url('/'));
@@ -106,7 +106,7 @@ class Twitter extends CI_Controller
 		}
 	}
 	
-	public function logout(){
+	public function signout(){
 		$this->reset_session();
 		$this->session->sess_destroy();
 		redirect(base_url('/'));
@@ -114,7 +114,7 @@ class Twitter extends CI_Controller
 
 	public function post($in_reply_to)
 	{
-		$message = $this->input->post('message');
+		$message = 'sdfsdfsdfsdfsdfdsf' ;//$this->input->post('message');
 		if(!$message || mb_strlen($message) > 140 || mb_strlen($message) < 1)
 		{
 			// Restrictions error. Notification here.
@@ -122,7 +122,7 @@ class Twitter extends CI_Controller
 		}
 		else
 		{
-			if($this->session->userdata('access_token') && $this->session->userdata('access_token_secret'))
+			if($this->twitteroauth->isLoggedIn())
 			{
 				$content = $this->connection->get('account/verify_credentials');
 				if(isset($content->errors))
