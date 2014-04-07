@@ -32,8 +32,13 @@ class Campaign extends CI_Controller {
 	
 	public function create()
 	{
+		if (!$this->user->isLoggedIn()) {
+			$this->user->setFlash('You need to be logged in to create a new campaign.');
+			redirect(base_url('/'));
+		}
+		
 		$data = array(); // Add default data
-		$this->layout->view('campaign_edit', $data);	
+		$this->layout->view('campaign_edit', $data);
 	}
 }
 

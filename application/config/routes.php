@@ -40,6 +40,7 @@
 
 $route['signout'] = "/twitter/signout";
 $route['signin'] = "/twitter/auth";
+$route['signin/new_campaign'] = "/twitter/auth/new_campaign";
 $route['campaign/new'] = "/campaign/create";
 $route['default_controller'] = "main";
 $route['404_override'] = '';

@@ -241,8 +241,4 @@ class TwitterOAuth {
 		}
 		return strlen($header);
 	}
-
-	function isLoggedIn(){
-		return ($this->obj->session->userdata('access_token') && $this->obj->session->userdata('access_token_secret'))?true:false;
-	}
 }

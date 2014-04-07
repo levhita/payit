@@ -20,7 +20,8 @@ class Twitter extends CI_Controller
 	function __construct()
 	{
 		parent::__construct();
-		if($this->twitteroauth->isLoggedIn())
+
+		if($this->user->isLoggedIn())
 		{
 			// If user already logged in
 			$this->connection = $this->twitteroauth->create($this->config->item('twitter_consumer_token'), $this->config->item('twitter_consumer_secret'), $this->session->userdata('access_token'),  $this->session->userdata('access_token_secret'));
@@ -44,7 +45,11 @@ class Twitter extends CI_Controller
 	 */
 	public function auth()
 	{
-		if($this->twitteroauth->isLoggedIn())
+		if ( $this->uri->segment(2)=='new_campaign' ) {
+			$this->session->set_userdata('new_campaign', true);
+		}
+
+		if($this->user->isLoggedIn())
 		{
 			// User is already authenticated. Add your user notification code here.
 			redirect(base_url('/'));
@@ -96,6 +101,11 @@ class Twitter extends CI_Controller
 				$this->session->unset_userdata('request_token');
 				$this->session->unset_userdata('request_token_secret');
 				
+				if ( $this->session->userdata('new_campaign') ) {
+					$this->session->unset_userdata('new_campaign');
+					redirect(base_url('/campaign/new'));	
+				}
+
 				redirect(base_url('/'));
 			}
 			else
@@ -106,7 +116,7 @@ class Twitter extends CI_Controller
 		}
 	}
 	
-	public function signout(){
+	public function signout() {
 		$this->reset_session();
 		$this->session->sess_destroy();
 		redirect(base_url('/'));
@@ -122,7 +132,7 @@ class Twitter extends CI_Controller
 		}
 		else
 		{
-			if($this->twitteroauth->isLoggedIn())
+			if($this->user->isLoggedIn())
 			{
 				$content = $this->connection->get('account/verify_credentials');
 				if(isset($content->errors))
