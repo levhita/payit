@@ -37,7 +37,7 @@
 				</ul>
 				<ul class="nav navbar-nav navbar-right">
 					<?php if($_is_logged_in_): ?>
-					<li><a href="/account/"><i class="fa fa-user fa-lg"></i> <?php echo $this->session->userdata['twitter_screen_name']?></a></li>
+					<li><a href="/account/"><i class="fa fa-user fa-lg"></i> <?php echo $this->session->userdata('user')['username']?></a></li>
 					<li><a href="/signout"><i class="fa fa-sign-out fa-lg"></i> Sign out</a></li>
 				<?php else: ?>
 				<li><a href="/signin"><i class="fa fa-twitter fa-lg"></i> Sign in with Twitter</a></li>

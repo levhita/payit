@@ -24,9 +24,9 @@ class Twitter extends CI_Controller
 		if($this->user->isLoggedIn())
 		{
 			// If user already logged in
-			$this->connection = $this->twitteroauth->create($this->config->item('twitter_consumer_token'), $this->config->item('twitter_consumer_secret'), $this->session->userdata('access_token'),  $this->session->userdata('access_token_secret'));
+			$this->connection = $this->twitteroauth->create($this->config->item('twitter_consumer_token'), $this->config->item('twitter_consumer_secret'), $this->session->userdata('user')['twitter_access_token'],  $this->session->userdata('user')['twitter_access_secret']);
 		}
-		elseif($this->session->userdata('request_token') && $this->session->userdata('request_token_secret'))
+		else if($this->session->userdata('request_token') && $this->session->userdata('request_token_secret'))
 		{
 			// If user in process of authentication
 			$this->connection = $this->twitteroauth->create($this->config->item('twitter_consumer_token'), $this->config->item('twitter_consumer_secret'), $this->session->userdata('request_token'), $this->session->userdata('request_token_secret'));
@@ -84,7 +84,7 @@ class Twitter extends CI_Controller
 	{
 		if($this->input->get('oauth_token') && $this->session->userdata('request_token') !== $this->input->get('oauth_token'))
 		{
-			$this->reset_session();
+			$this->user->logout();
 			redirect(base_url('/twitter/auth'));
 		}
 		else
@@ -93,10 +93,22 @@ class Twitter extends CI_Controller
 		
 			if ($this->connection->http_code == 200)
 			{
-				$this->session->set_userdata('access_token', $access_token['oauth_token']);
-				$this->session->set_userdata('access_token_secret', $access_token['oauth_token_secret']);
-				$this->session->set_userdata('twitter_user_id', $access_token['user_id']);
-				$this->session->set_userdata('twitter_screen_name', $access_token['screen_name']);
+				$user_data = array (
+					'username' => $access_token['screen_name'],
+					'twitter_access_token' => $access_token['oauth_token'],
+					'twitter_access_secret' => $access_token['oauth_token_secret'],
+					'twitter_user_id' => $access_token['user_id'],
+				);
+				
+				if ( !$user_id = $this->user->userExists($user_data['twitter_user_id']) ) {
+					if (! $user_id = $this->user->addNewUser($user_data) ){
+						log_message('error', 'Couldn\'t add user');
+					}
+				} else {
+					$this->user->updateUserData($user_id, $user_data);
+					$user_data = $this->user->getLoggedInUserData();
+				}
+				$this->session->set_userdata('user', $user_data);
 
 				$this->session->unset_userdata('request_token');
 				$this->session->unset_userdata('request_token_secret');
@@ -117,7 +129,7 @@ class Twitter extends CI_Controller
 	}
 	
 	public function signout() {
-		$this->reset_session();
+		$this->user->clearSession();
 		$this->session->sess_destroy();
 		redirect(base_url('/'));
     }
@@ -138,7 +150,7 @@ class Twitter extends CI_Controller
 				if(isset($content->errors))
 				{
 					// Most probably, authentication problems. Begin authentication process again.
-					$this->reset_session();
+					$this->user->clearSession();
 					redirect(base_url('/twitter/auth'));
 				}
 				else
@@ -167,21 +179,6 @@ class Twitter extends CI_Controller
 				redirect(base_url('/twitter/auth'));
 			}
 		}
-	}
-	
-	/**
-	 * Reset session data
-	 * @access	private
-	 * @return	void
-	 */
-	private function reset_session()
-	{
-		$this->session->unset_userdata('access_token');
-		$this->session->unset_userdata('access_token_secret');
-		$this->session->unset_userdata('request_token');
-		$this->session->unset_userdata('request_token_secret');
-		$this->session->unset_userdata('twitter_user_id');
-		$this->session->unset_userdata('twitter_screen_name');
 	}
 }
 
