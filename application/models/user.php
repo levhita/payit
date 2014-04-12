@@ -19,7 +19,7 @@ class User extends CI_Model {
     
     public function updateUserData($user_id, $user_data){
         $this->db->where('user_id', $user_id);
-        $this->db->update('user', $data); 
+        $this->db->update('user', $user_data); 
     }
 
     public function isNewUser() {
@@ -30,16 +30,24 @@ class User extends CI_Model {
            }
         return false;
     }
-    public function getLoggedInUserData() {
-        $user_data = 
+    public function getUserData($user_id) {
+        $query = $this->db->get_where('user', array('user_id'=> $user_id)); 
+        return $query->row();
     }
     
+    /*public function getLoggedInUser(){
+        $user = $this->session->userdata('user');
+
+        return $this->db->select('*')->from('user')->where('user_id', $user['user_id']); 
+    }*/
+
     public function getLoggedInUser(){
-        return (object)$this->session->userdata('user');
+        return $this->session->userdata('user');
     }
     
     public function userExists($twitter_user_id) {
-        return false;
+        $query = $this->db->get_where('user', array('twitter_user_id'=> $twitter_user_id));
+        return ($query->num_rows()>0)?$query->row()->user_id:false;
     }
 
     public function setFlash($message, $type="info") {

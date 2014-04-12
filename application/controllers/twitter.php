@@ -93,21 +93,27 @@ class Twitter extends CI_Controller
 		
 			if ($this->connection->http_code == 200)
 			{
-				$user_data = array (
+				$twitter_data = array (
 					'username' => $access_token['screen_name'],
 					'twitter_access_token' => $access_token['oauth_token'],
 					'twitter_access_secret' => $access_token['oauth_token_secret'],
 					'twitter_user_id' => $access_token['user_id'],
 				);
 				
-				if ( !$user_id = $this->user->userExists($user_data['twitter_user_id']) ) {
-					if (! $user_id = $this->user->addNewUser($user_data) ){
+				$user_id = $this->user->userExists($twitter_data['twitter_user_id']);
+				
+				if ($user_id===false) {
+					// User doesn't exists add it
+					$user_id = $this->user->addNewUser($twitter_data);
+					if (!$user_id ){
 						log_message('error', 'Couldn\'t add user');
+						//die? redirect? this is really extreme.
 					}
 				} else {
-					$this->user->updateUserData($user_id, $user_data);
-					$user_data = $this->user->getLoggedInUserData();
+					// Already exists, Update info and keys that could have changed.
+					$this->user->updateUserData($user_id, $twitter_data);
 				}
+				$user_data = $this->user->getUserData($user_id);
 				$this->session->set_userdata('user', $user_data);
 
 				$this->session->unset_userdata('request_token');
@@ -136,7 +142,7 @@ class Twitter extends CI_Controller
 
 	public function post($in_reply_to)
 	{
-		$message = 'sdfsdfsdfsdfsdfdsf' ;//$this->input->post('message');
+		$message = 'Test twit for PayIt' ;//$this->input->post('message');
 		if(!$message || mb_strlen($message) > 140 || mb_strlen($message) < 1)
 		{
 			// Restrictions error. Notification here.
