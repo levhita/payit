@@ -25,7 +25,7 @@ class User extends CI_Model {
     public function isNewUser() {
     	if ( $this->isLoggedIn() ) {
             $user = $this->getLoggedInUser();
-            $this->db->select('new_user')->from('user')->where('user_id', $user_data->user_id); 
+            $this->db->select('new_user')->from('user')->where('user_id', $user->user_id); 
             return ($this->db->get()->row()->new_user == 0)?false:true;
            }
         return false;

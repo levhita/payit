@@ -19,34 +19,40 @@
 	<script src="/js/handlebars.js"></script>
 </head>
 <body>
-	<div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-		<div class="container">
-			<div class="navbar-header">
-				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-					<span class="sr-only">Toggle navigation</span>
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-				</button>
-				<a class="navbar-brand" href="#">Pay It</a>
-			</div>
-			<div class="collapse navbar-collapse">
-				<ul class="nav navbar-nav">
-					<li class="active"><a href="#">Home</a></li>
+<div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+	<div class="container">
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+				<span class="sr-only">Toggle navigation</span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</button>
+			<a class="navbar-brand" href="#">Pay It</a>
+		</div>
+		<div class="collapse navbar-collapse">
+			<ul class="nav navbar-nav">
+				<li class="active"><a href="#">Home</a></li>
+			</ul>
 
-				</ul>
-				<ul class="nav navbar-nav navbar-right">
-					<?php if($_is_logged_in_): ?>
-					<li><a href="/account/"><i class="fa fa-user fa-lg"></i> <?php echo $this->session->userdata('user')['username']?></a></li>
-					<li><a href="/signout"><i class="fa fa-sign-out fa-lg"></i> Sign out</a></li>
+			<ul class="nav navbar-nav navbar-right">
+				<?php if($_is_logged_in_): ?>
+				<li><a href="/account/"><i class="fa fa-user fa-lg"></i>
+					<?php echo htmlentities($this->session->userdata('user')->username); ?>
+				</a></li>
+				<li><a href="/signout"><i class="fa fa-sign-out fa-lg"></i>
+					Sign out
+				</a></li>
 				<?php else: ?>
-				<li><a href="/signin"><i class="fa fa-twitter fa-lg"></i> Sign in with Twitter</a></li>
-			<?php endif;?>
-		</ul>
+				<li><a href="/signin"><i class="fa fa-twitter fa-lg"></i>
+					Sign in with Twitter
+				</a></li>
+				<?php endif;?>
+			</ul>
+		</div>
+	</div>
+</div><!--/.nav-collapse -->
 
-	</div><!--/.nav-collapse -->
-</div>
-</div>
 <?php if($_flash_):?>
 <div class="container">
 	<div class="alert <?php echo $_flash_['class']?> alert-dismissable">

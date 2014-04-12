@@ -24,7 +24,7 @@ class Twitter extends CI_Controller
 		if($this->user->isLoggedIn())
 		{
 			// If user already logged in
-			$this->connection = $this->twitteroauth->create($this->config->item('twitter_consumer_token'), $this->config->item('twitter_consumer_secret'), $this->session->userdata('user')['twitter_access_token'],  $this->session->userdata('user')['twitter_access_secret']);
+			$this->connection = $this->twitteroauth->create($this->config->item('twitter_consumer_token'), $this->config->item('twitter_consumer_secret'), $this->session->userdata('user')->twitter_access_token,  $this->session->userdata('user')->twitter_access_secret);
 		}
 		else if($this->session->userdata('request_token') && $this->session->userdata('request_token_secret'))
 		{
