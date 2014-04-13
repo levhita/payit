@@ -19,7 +19,7 @@ class User extends CI_Model {
     
     public function updateUserData($user_id, $user_data){
         $this->db->where('user_id', $user_id);
-        $this->db->update('user', $user_data); 
+        return $this->db->update('user', $user_data);
     }
 
     public function isNewUser() {

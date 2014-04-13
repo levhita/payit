@@ -106,15 +106,14 @@
 			//TODO Validation
 			$.ajax({
 				type: "POST",
-				url: "/user/register",
+				url: "/account/register",
 				data: {
-					first_name: $('#firstNameInput').val(),
-					last_name: $('#lastNameInput').val(),
+					firstname: $('#firstNameInput').val(),
+					lastname: $('#lastNameInput').val(),
 					email: $('#emailInput').val(),
 				}
 			}).done(function(data) {
-				// Close
-				console.log(data());
+				$('#newUserModal').modal('hide');	
 			});
 		});
 	});
