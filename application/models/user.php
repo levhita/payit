@@ -17,9 +17,9 @@ class User extends CI_Model {
         return false;
     }
     
-    public function updateUserData($user_id, $user_data){
+    public function updateUserData($user_id, $data){
         $this->db->where('user_id', $user_id);
-        return $this->db->update('user', $user_data);
+        return $this->db->update('user', $data);
     }
 
     public function isNewUser() {

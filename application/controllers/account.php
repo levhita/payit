@@ -41,18 +41,19 @@ class Account extends CI_Controller {
 				array(
 					'status' => FALSE,
 					'error' => "Couldn't save user details",
-					)
-				);
+				)
+			);
 			return;
 		}
+		
 		header('Content-type: application/json');
 		header('HTTP/1.1 200 OK');
 		echo json_encode(
 			array(
 				'status' => true,
 				'error' => "Succesfully saved",
-				)
-			);
+			)
+		);
 	}
 }
 
