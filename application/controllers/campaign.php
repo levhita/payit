@@ -17,35 +17,30 @@ class Campaign extends CI_Controller {
 	 * map to /index.php/welcome/<method_name>
 	 * @see http://codeigniter.com/user_guide/general/urls.html
 	 */
-	public function index()
-	{
-		// see campaign... retrieve id
-		$this->layout->view('landpage');
-	}
 
 	public function edit()
 	{
 		//edit campaign
 		$data = array(); // Load this data from database
-		$this->layout->view('campaign_edit', $data);
+		$this->layout->view('campaign/edit', $data);
 	}
 	
 	public function create()
 	{
-		if (!$this->user->isLoggedIn()) {
-			$this->user->setFlash('You need to be logged in to create a new campaign.');
+		if (!$this->user_model->isLoggedIn()) {
+			$this->user_model->setFlash('You need to be logged in to create a new campaign.');
 			redirect(base_url('/'));
 		}
 	
-		$this->layout->view('campaign_edit', $data);
+		$this->layout->view('campaign/edit');
 	}
 
-	public function saveCampaign(){
-		if (!$this->user->isLoggedIn()) {
+	public function save(){
+		if (!$this->user_model->isLoggedIn()) {
 			//TODO: Send 403 error
 			return;
 		}
-		$user = $this->user->getLoggedInUser();
+		$user = $this->user_model->getLoggedInUser();
 		$data = array (
 			'user_id' => $user->user_id,
 			'name' => $this->input->post('name'),
@@ -56,26 +51,47 @@ class Campaign extends CI_Controller {
 		);
 		$data = $this->security->xss_clean($data);
 
-		$campaign_id = $this->input->post('campaign_id');
+		$campaign_id = (int)$this->input->post('campaign_id');
 		
 		if ($campaign_id!==0) {
-			$campaign = $this->campaign->get($campaign_id);
+			$campaign = $this->campaign_model->get($campaign_id);
 			if (!$campaign) {
 				echo "//TODO: send badrequest error campaign doesn't exist";
 				return;
 			} 
 			if ($campaign->user_id != $user->user_id) {
-				echo "//TODO: Send 403 no permission":
+				echo "//TODO: Send 403 no permission";
 				return;
 			}
-			$this->campaign->update($campaign_id, $data);
+			$this->campaign_model->update($campaign_id, $data);
 		} else {
-			if (!$campaign_id = $this->campaign->add($data)){
+			if (!$campaign_id = $this->campaign_model->add($data)){
 				echo "//TODO: error creating campaign";
 				return;
 			}
 		}
+		header('Content-type: application/json');
+		header('HTTP/1.1 200 OK');
+		echo json_encode(array(
+			'status' => true,
+			'campaign' => (array)$this->campaign_model->get($campaign_id),
+		));
+	}
+	
+	public function view() {
+		if(!$campaign = $this->campaign_model->getByPrettyURL($this->uri->segment(2))) {
+			$this->user_model->setFlash("That Campaign doesn't exists", 'error');
+			redirect(base_url('/'));
+		}	
+		if ($this->user_model->isLoggedIn()) {
+			$user = $this->user_model->getLoggedInUser();
+		}
 		
+		$data = array (
+			'is_owner' => ($user->user_id==$campaign->user_id),
+			'campaign' => $campaign,
+		);
+		$this->layout->view('campaign/view', $data);
 	}
 }
 

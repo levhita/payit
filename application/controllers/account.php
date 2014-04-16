@@ -24,7 +24,7 @@ class Account extends CI_Controller {
 	}
 
 	public function register() {
-		$user = $this->user->getLoggedInUser();
+		$user = $this->user_model->getLoggedInUser();
 		$user_data = array(
 			'firstname' => $this->input->post('firstname'),
 			'lastname' => $this->input->post('lastname'),
@@ -32,7 +32,7 @@ class Account extends CI_Controller {
 			'new_user' => '0'
 			);
 		$user_data = $this->security->xss_clean($user_data);
-		if (!$this->user->updateUserData($user->user_id, $user_data) ){
+		if (!$this->user_model->updateUserData($user->user_id, $user_data) ){
 			header('Cache-Control: no-cache, must-revalidate');
 			header('Content-type: application/json');
 			header('HTTP/1.1 400 Bad Request');

@@ -38,6 +38,7 @@
 |
 */
 
+$route['c/(:any)'] = "/campaign/view/$1";
 $route['signout'] = "/twitter/signout";
 $route['signin'] = "/twitter/auth";
 $route['signin/new_campaign'] = "/twitter/auth/new_campaign";

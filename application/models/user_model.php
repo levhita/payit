@@ -1,6 +1,6 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class User extends CI_Model {
+class User_model extends CI_Model {
 
     function __construct()
     {
@@ -51,12 +51,21 @@ class User extends CI_Model {
     }
 
     public function setFlash($message, $type="info") {
-    	$flash = array('message'=>$message);
-    	if( $type=='success' || $type=='info' || $type=='warning' || $type=='danger' ) {
-    		$flash['class']		='alert-'.$type;
-	    	$flash['label']		= ucfirst($type).'!';
-	    }
-    	$this->session->set_userdata('flash', $flash);
+        $flash = array('message'=>$message);
+        if( $type=='error' || $type=='notice' || $type=='success' || $type=='info' || $type=='warning' || $type=='danger' ) {
+            if ( $type=='error' ) {
+                $flash['class']     ='alert-danger';
+                $flash['label']     ='Error!';
+            } else if ( $type=='notice' ) {
+                $flash['class']     ='alert-info';
+                $flash['label']     ='Notice:';
+            } else {
+                $flash['class']     ='alert-'.$type;
+                $flash['label']     = ucfirst($type).'!';
+            }
+            $this->session->set_userdata('flash', $flash);
+        }
+        
     }
     
     public function getFlash($destroy=true) {

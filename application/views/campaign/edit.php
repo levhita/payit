@@ -1,11 +1,11 @@
 <div class="container">
 	<div class="row">
 		<div class="col-md-6">
-			<form role="form">
+			<form role="form" id="new_campaign_form">
 				<h1>New Campaign</h1>
 				<div class="form-group">
-					<label for="campaign_name">Campaign Name</label>
-					<input type="text" class="form-control" id="campaign_name" placeholder="Cool Campaign Name">
+					<label for="name">Campaign Name</label>
+					<input type="text" class="form-control" id="name" placeholder="Cool Campaign Name">
 				</div>
 				<div class="form-group">
 					<label for="pretty_url">Pretty URL</label>
@@ -27,37 +27,35 @@
 						presented to the user when once the twit is sent.
 					</small>
 				</div>
-
-				<button id="campaign_save" type="button" class="btn btn-default btn-primary pull-right">Preview »</button>
+				<input type="hidden" id="campaign_id" value="0"/>
 			</form>
+			<button id="campaign_preview" type="button" class="btn btn-default btn-primary">Preview <i class="fa fa-angle-double-right"></i></button>	
 		</div>
+		<br/>
 		<div class="col-md-6">
-			<h1>Cool Event</h1>
-			<div>
-				Cool event is the coolest event in the ZMG, and you should really really go.<br/>
+			<div id="preview"></div>
+			<div id="save_bar" class="hidden">
 				<br/>
-				We'll have clowns, drinks and assorted nuts, because you are worth it<br/>
- 				<br/>
- 				The only thing you have to do is to PayIt with a twit :D<br/>
- 				<br/>
- 				Easypeacy... ¡We are expecting you!<br/>
- 				<br/>
-				Day:<br/>
-				24 Feb 2014 7:00pm<br/>
-				Place:<br/>
-				HackerGarage<br/>
-				Vidrio #2184<br/>
-				Col. Americana<br/>
-				Guadalajara, Jal.<br/>
+				<button id="campaign_save" type="button" class="btn btn-default btn-primary"><i class="fa fa-upload"></i> Publish</button>	
 			</div>
-			
-			<h3>Twitt</h3>
-			<img class="pull-left" src="http://placekitten.com/48/48" style="width:48px; height:48px; margin:5px" title="avatar"/>
-			<h2 style="margin-top:32px;">@Username</h2>
-			<div style="clear:both">this is a very cool twit.</div>
 		</div>
+
 	</div>
 </div>
+
+<script id="preview-template" type="text/x-handlebars-template">
+  <h1>{{name}}</h1>
+	<div>{{nl2br description}}</div>
+			
+	<h3>Twitt</h3>
+	<img class="pull-left" src="http://placekitten.com/48/48" style="width:48px; height:48px; margin:5px" title="avatar"/>
+	<h2 style="margin-top:32px;">@Username</h2>
+	<div style="clear:both">{{twit}}</div>
+
+	<h3>Thank you text</h3>
+	<div>{{nl2br thank_you}}</div>
+</script>
+
 
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 <script src="/js/campaign_edit.js"></script>

@@ -1,6 +1,6 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Campaign extends CI_Model {
+class Campaign_model extends CI_Model {
 
     function __construct()
     {
@@ -24,6 +24,10 @@ class Campaign extends CI_Model {
     
     public function get($campaign_id) {
         $query = $this->db->get_where('campaign', array('campaign_id'=> $campaign_id)); 
+        return $query->row();
+    }
+    public function getByPrettyURL($pretty_url) {
+        $query = $this->db->get_where('campaign', array('pretty_url'=> $pretty_url)); 
         return $query->row();
     }
 }

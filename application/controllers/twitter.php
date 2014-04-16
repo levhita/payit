@@ -21,7 +21,7 @@ class Twitter extends CI_Controller
 	{
 		parent::__construct();
 
-		if($this->user->isLoggedIn())
+		if($this->user_model->isLoggedIn())
 		{
 			// If user already logged in
 			$this->connection = $this->twitteroauth->create($this->config->item('twitter_consumer_token'), $this->config->item('twitter_consumer_secret'), $this->session->userdata('user')->twitter_access_token,  $this->session->userdata('user')->twitter_access_secret);
@@ -49,7 +49,7 @@ class Twitter extends CI_Controller
 			$this->session->set_userdata('new_campaign', true);
 		}
 
-		if($this->user->isLoggedIn())
+		if($this->user_model->isLoggedIn())
 		{
 			// User is already authenticated. Add your user notification code here.
 			redirect(base_url('/'));
@@ -84,7 +84,7 @@ class Twitter extends CI_Controller
 	{
 		if($this->input->get('oauth_token') && $this->session->userdata('request_token') !== $this->input->get('oauth_token'))
 		{
-			$this->user->logout();
+			$this->user_model->logout();
 			redirect(base_url('/twitter/auth'));
 		}
 		else
@@ -100,20 +100,20 @@ class Twitter extends CI_Controller
 					'twitter_user_id' => $access_token['user_id'],
 				);
 				
-				$user_id = $this->user->userExists($twitter_data['twitter_user_id']);
+				$user_id = $this->user_model->userExists($twitter_data['twitter_user_id']);
 				
 				if ($user_id===false) {
 					// User doesn't exists add it
-					$user_id = $this->user->addNewUser($twitter_data);
+					$user_id = $this->user_model->addNewUser($twitter_data);
 					if (!$user_id ){
 						log_message('error', 'Couldn\'t add user');
 						//die? redirect? this is really extreme.
 					}
 				} else {
 					// Already exists, Update info and keys that could have changed.
-					$this->user->updateUserData($user_id, $twitter_data);
+					$this->user_model->updateUserData($user_id, $twitter_data);
 				}
-				$user_data = $this->user->getUserData($user_id);
+				$user_data = $this->user_model->getUserData($user_id);
 				$this->session->set_userdata('user', $user_data);
 
 				$this->session->unset_userdata('request_token');
@@ -135,7 +135,7 @@ class Twitter extends CI_Controller
 	}
 	
 	public function signout() {
-		$this->user->clearSession();
+		$this->user_model->clearSession();
 		$this->session->sess_destroy();
 		redirect(base_url('/'));
     }
@@ -150,13 +150,13 @@ class Twitter extends CI_Controller
 		}
 		else
 		{
-			if($this->user->isLoggedIn())
+			if($this->user_model->isLoggedIn())
 			{
 				$content = $this->connection->get('account/verify_credentials');
 				if(isset($content->errors))
 				{
 					// Most probably, authentication problems. Begin authentication process again.
-					$this->user->clearSession();
+					$this->user_model->clearSession();
 					redirect(base_url('/twitter/auth'));
 				}
 				else
