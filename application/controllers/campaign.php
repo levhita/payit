@@ -83,14 +83,18 @@ class Campaign extends CI_Controller {
 			$this->user_model->setFlash("That Campaign doesn't exists", 'error');
 			redirect(base_url('/'));
 		}	
+		
+		$data = array();
 		if ($this->user_model->isLoggedIn()) {
 			$user = $this->user_model->getLoggedInUser();
+			$data['is_owner'] = ($user->user_id==$campaign->user_id);
+		} else {
+			$data['is_owner'] = FALSE;
 		}
 		
-		$data = array (
-			'is_owner' => ($user->user_id==$campaign->user_id),
-			'campaign' => $campaign,
-		);
+		$data['campaign'] = $campaign;
+		
+		
 		$this->layout->view('campaign/view', $data);
 	}
 }
