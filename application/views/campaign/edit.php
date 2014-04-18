@@ -56,6 +56,4 @@
 	<div>{{nl2br thank_you}}</div>
 </script>
 
-
-<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 <script src="/js/campaign_edit.js"></script>

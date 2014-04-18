@@ -27,12 +27,31 @@ class Campaign extends CI_Controller {
 	
 	public function create()
 	{
-		if (!$this->user_model->isLoggedIn()) {
-			$this->user_model->setFlash('You need to be logged in to create a new campaign.');
-			redirect(base_url('/'));
+		
+		$data = array (
+			'name' => $this->input->post('name'),
+			'pretty_url' => str_replace(' ','_', strtolower($this->input->post('name'))),
+			'description' => 'This is an example description',
+			'twit' => 'This is an example twit',
+			'thank_you' => 'This is an example thank you text'
+		);
+		$data = $this->security->xss_clean($data);
+
+		if ($this->user_model->isLoggedIn()) {
+			$user = $this->user_model->getLoggedInUser();
+			$data['user_id']=$user->user_id;
 		}
-	
-		$this->layout->view('campaign/edit');
+		
+		if (!$campaign_id = $this->campaign_model->add($data)) {
+				echo "//TODO: error creating campaign";
+				return;
+		}
+		header('Content-type: application/json');
+		header('HTTP/1.1 200 OK');
+		echo json_encode(array(
+			'status' => true,
+			'campaign' => (array)$this->campaign_model->get($campaign_id),
+		));
 	}
 
 	public function save(){
