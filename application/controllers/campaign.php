@@ -40,12 +40,19 @@ class Campaign extends CI_Controller {
 		if ($this->user_model->isLoggedIn()) {
 			$user = $this->user_model->getLoggedInUser();
 			$data['user_id']=$user->user_id;
+		} else {
+			$this->session->set_userdata[]
 		}
 		
 		if (!$campaign_id = $this->campaign_model->add($data)) {
 				echo "//TODO: error creating campaign";
 				return;
 		}
+		
+		if (!$this->user_model->isLoggedIn()) {
+		 	$this->session->set_userdata['pending_campaign_id'] = $campaign_id;
+		}
+
 		header('Content-type: application/json');
 		header('HTTP/1.1 200 OK');
 		echo json_encode(array(

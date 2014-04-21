@@ -28,12 +28,12 @@
 				<span class="icon-bar"></span>
 				<span class="icon-bar"></span>
 			</button>
-			<a class="navbar-brand" href="#">Pay It</a>
+			<a class="navbar-brand" href="/">Pay It</a>
 		</div>
 		<div class="collapse navbar-collapse">
-			<ul class="nav navbar-nav">
-				<li class="active"><a href="#">Home</a></li>
-			</ul>
+			<!--<ul class="nav navbar-nav">
+				<li class="active"><a href="/">Home</a></li>
+			</ul>-->
 
 			<ul class="nav navbar-nav navbar-right">
 				<?php if($_is_logged_in_): ?>
@@ -64,60 +64,5 @@
 
 <?php echo $_content_for_layout_ ?>
 
-<?php if($_is_new_user_): ?>
-	<div class="modal fade" id="newUserModal" tabindex="-1" role="dialog" aria-labelledby="newUserModalLabel" aria-hidden="true">
-		<div class="modal-dialog">
-			<div class="modal-content">
-				<div class="modal-header">
-					<h4 class="modal-title" id="newUserModalLabel">New User</h4>
-				</div>
-				<div class="modal-body">
-					<form role="form">
-						<div class="form-group">
-							<label for="firstNameInput">First Name</label>
-							<input type="text" class="form-control" id="firstNameInput" placeholder="John">
-						</div>
-						<div class="form-group">
-							<label for="lastNameInput">Last Name</label>
-							<input type="text" class="form-control" id="lastNameInput" placeholder="Doe">
-						</div>
-						<div class="form-group">
-							<label for="emailInput">Email address</label>
-							<input type="email" class="form-control" id="emailInput" placeholder="example@example.org">
-						</div>
-					</form>
-				</div>
-				<div class="modal-footer">
-					<button id="registerUserButton" type="button" class="btn btn-primary">Register</button>
-				</div>
-			</div>
-		</div>
-	</div>
-	
-	<script>
-	$(document).ready(function() {
-		$('#newUserModal').modal({
-			keyboard: false,  // THERE IS NO
-			backdrop:'static' // ESCAPE MUAHAHA!!!
-		});
-		$('#newUserModal').modal('show');
-
-		$('#registerUserButton').bind('click', function(){
-			//TODO Validation
-			$.ajax({
-				type: "POST",
-				url: "/account/register",
-				data: {
-					firstname: $('#firstNameInput').val(),
-					lastname: $('#lastNameInput').val(),
-					email: $('#emailInput').val(),
-				}
-			}).done(function(data) {
-				$('#newUserModal').modal('hide');	
-			});
-		});
-	});
-	</script>		
-	<?php endif; ?>
 </body>
 </html>
