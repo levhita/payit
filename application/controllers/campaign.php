@@ -40,8 +40,6 @@ class Campaign extends CI_Controller {
 		if ($this->user_model->isLoggedIn()) {
 			$user = $this->user_model->getLoggedInUser();
 			$data['user_id']=$user->user_id;
-		} else {
-			$this->session->set_userdata[]
 		}
 		
 		if (!$campaign_id = $this->campaign_model->add($data)) {
@@ -50,7 +48,7 @@ class Campaign extends CI_Controller {
 		}
 		
 		if (!$this->user_model->isLoggedIn()) {
-		 	$this->session->set_userdata['pending_campaign_id'] = $campaign_id;
+		 	$this->session->set_userdata('pending_campaign_id',$campaign_id);
 		}
 
 		header('Content-type: application/json');
@@ -111,14 +109,19 @@ class Campaign extends CI_Controller {
 		}	
 		
 		$data = array();
+		$data['campaign'] = $campaign;
+		
 		if ($this->user_model->isLoggedIn()) {
 			$user = $this->user_model->getLoggedInUser();
 			$data['is_owner'] = ($user->user_id==$campaign->user_id);
 		} else {
-			$data['is_owner'] = FALSE;
+			if($pending_campaign_id = $this->session->userdata('pending_campaign_id')){
+				$data['pending_campaign_id'] = $pending_campaign_id;
+				$data['is_owner'] = ($campaign->campaign_id==$pending_campaign_id);
+			} else {
+				$data['is_owner'] = false;
+			}
 		}
-		
-		$data['campaign'] = $campaign;
 		
 		
 		$this->layout->view('campaign/view', $data);
